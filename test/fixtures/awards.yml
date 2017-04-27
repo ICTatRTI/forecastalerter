@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usaid_web_id: MyString
+  mbio_name: MyText
+  aa_specialist: MyText
+  title: MyText
+  description: MyText
+  sector: MyText
+  code: MyString
+  cost_range: MyString
+  incumbent: MyText
+  type: 
+  sb_setaside: MyString
+  fiscal_year: MyString
+  award_date: 2017-04-24
+  release_date: 2017-04-24
+  award_length: MyString
+  solicitation_number: MyString
+  bf_status_change: MyText
+  location: MyString
+  last_modified_date: 2017-04-24 10:05:00
+
+two:
+  usaid_web_id: MyString
+  mbio_name: MyText
+  aa_specialist: MyText
+  title: MyText
+  description: MyText
+  sector: MyText
+  code: MyString
+  cost_range: MyString
+  incumbent: MyText
+  type: 
+  sb_setaside: MyString
+  fiscal_year: MyString
+  award_date: 2017-04-24
+  release_date: 2017-04-24
+  award_length: MyString
+  solicitation_number: MyString
+  bf_status_change: MyText
+  location: MyString
+  last_modified_date: 2017-04-24 10:05:00
