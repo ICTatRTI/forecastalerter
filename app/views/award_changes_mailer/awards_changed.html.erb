@@ -40,7 +40,26 @@
         <% if change['changes'] %>
           <ul style="color:#31708f;"">
             <% change['changes'].each do |field, values| %>
-              <li><strong><%= field %></strong> was changed from <em><%= values['past'] %></em> to <em><%= values['new'] %></em></li>
+              <% if (values['new'] && values['new'].length > 70) || 
+                  (values['past'] && values['past'].length > 70) %>
+                <li>
+                  <strong><%= field %></strong> was updated 
+                  <ul>
+                    <li>
+                      <strong>New</strong> - <%= values['new'] %>
+                    </li>
+                    <li>
+                      <strong>Previous</strong> - <%= values['past'] %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li>
+                  <strong><%= field %></strong> was changed from 
+                  <em><%= values['past'] %></em> to 
+                  <em><%= values['new'] %></em>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         <% elsif change['new'] %>

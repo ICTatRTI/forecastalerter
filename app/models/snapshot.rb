@@ -26,7 +26,11 @@ class Snapshot < ApplicationRecord
     urls = map_title_urls titles, html
     awards.each do |award|
       award['url'] = urls[award[Award::HEADERS[:title]]]
-      award['usaid_web_id'] = award['url'].split('/').last
+      if award['url']
+        award['usaid_web_id'] = award['url'].split('/').last
+      else
+        puts "URL not found for award '#{award[Award::HEADERS[:title]]}'"
+      end
     end
     return awards
   end
