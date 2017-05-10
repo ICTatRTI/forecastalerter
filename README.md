@@ -7,28 +7,6 @@ This is a simple application to alert changes in items on the USAID Business For
 
 ## Model
 
-  - `Award` An item in the USAID forecast
-    - *id* - integer - DB ID
-    - *usaid_web_id* - string - Internal USAID web ID (ID on URL)
-    - *mbio_name* - text -  M/B/IO Name
-    - *aa_specialist* - text - A&A Specialist
-    - *title* - text - Award Title
-    - *description* - text - Award Description
-    - *sector* - text - Sector
-    - *code* - string - Code
-    - *cost_range* - string - Total Estimated Cost/Amount Range
-    - *incumbent* - text - Incumbent
-    - *type* - string - Award/Action Type
-    - *sb_setaside* - string - Small Business Set Aside
-    - *fiscal_year* - string - Fiscal Year of Action
-    - *award_date* - date - Anticipated Award Date
-    - *release_date* - date - Anticipated Solicitation Release Date
-    - *award_length* - string - Award Length
-    - *solicitation_number* - string - Solicitation Number
-    - *bf_status_change* - text - Business Forecast Status Change
-    - *location* - string - Location
-    - *last_modified_at* - datetime - Last Modified Date
-    - *removed_at* - datetime - Removal detected date
   - `User` A user to be notified of changes
     - *id* - integer - DB ID
     - *email* - text - Email address of user
