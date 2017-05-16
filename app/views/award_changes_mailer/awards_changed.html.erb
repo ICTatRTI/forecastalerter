@@ -43,7 +43,7 @@
               <% if (values['new'] && values['new'].length > 70) || 
                   (values['past'] && values['past'].length > 70) %>
                 <li>
-                  <strong><%= field %></strong> was updated 
+                  <strong><%= Award::HEADERS[field.to_sym] %></strong> was updated 
                   <ul>
                     <li>
                       <strong>New</strong> - <%= values['new'] %>
@@ -55,7 +55,7 @@
                 </li>
               <% else %>
                 <li>
-                  <strong><%= field %></strong> was changed from 
+                  <strong><%= Award::HEADERS[field.to_sym] %></strong> was changed from 
                   <em><%= values['past'] %></em> to 
                   <em><%= values['new'] %></em>
                 </li>

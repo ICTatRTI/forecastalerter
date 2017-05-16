@@ -14,7 +14,6 @@ This is a simple application to alert changes in items on the USAID Business For
     - *id* - integer - DB ID
     - *forecast_workbook* - blob - forecast excel workbook
     - *forecast_web* - text - content of forecast search results
-    - *changes* - json - list of changes
 
 ## Process
 

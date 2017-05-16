@@ -35,4 +35,40 @@ module HtmlFileContent extend ActiveSupport::Concern
     return title_urls
   end
 
+  def html_to_awards html
+    doc = Nokogiri::HTML(html)
+    doc.css('.business-forecast-award').map do |award_div|
+      award = {}
+      url = award_div.at_css('.award-title a')['href']
+      award['url'] = "https://www.usaid.gov" + URI(url).path
+      award['usaid_web_id'] = award['url'].split('/').last
+      award['title'] = award_div.at_css('.award-title a').text
+
+      header = award_div.at_css('.header-info')
+      header.children.each do |he|
+        if he.text.downcase.include?(Award::HEADERS[:code].downcase)
+          award['code'] = he.text.split(':').last.squish
+        elsif he.text.downcase.include?(Award::HEADERS[:fiscal_year].downcase)
+          award['fiscal_year'] = he.text.split(':').last.squish
+        elsif he.text.downcase.include?(Award::HEADERS[:last_modified_at].downcase)
+          award['last_modified_at'] = he.text.split(':').last.squish
+        end
+      end
+
+      labels = award_div.css('.award-details .details-column .label').map(&:text)
+      labels += award_div.css('.award-details .details-tri-columns .label').map(&:text)
+      values = award_div.css('.award-details .details-column .value').map(&:text)
+      values += award_div.css('.award-details .details-tri-columns .value').map(&:text)
+      labels.each_with_index do |label, i|
+        if Award::HEADERS.key(label.gsub(/:\z/,''))
+          award[Award::HEADERS.key(label.gsub(/:\z/,'')).to_s] = values[i].squish
+        else
+          raise "Unable to find key '#{label}' for HTML awards"
+        end
+      end
+
+      award
+    end
+  end
+
 end

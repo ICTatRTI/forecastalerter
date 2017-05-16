@@ -19,26 +19,39 @@ class Snapshot < ApplicationRecord
     Snapshot.where("snapshot_time < ?", snapshot_time - 12.hours).order("snapshot_time desc").first
   end
 
+  # Pull out the awards from the files into a hash of properties, 
+  # including the usaid_web_ids from the search results.
   def awards_from_files
     awards = file_to_html_table forecast_workbook
-    titles = awards.map {|a| a[Award::HEADERS[:title]]}
+    titles = awards.map {|a| a['title']}
     html = Paperclip.io_adapters.for(forecast_web).read
     urls = map_title_urls titles, html
     awards.each do |award|
-      award['url'] = urls[award[Award::HEADERS[:title]]]
+      award['url'] = urls[award['title']]
       if award['url']
         award['usaid_web_id'] = award['url'].split('/').last
       else
-        puts "URL not found for award '#{award[Award::HEADERS[:title]]}'"
+        puts "URL not found for award '#{award['title']}'"
       end
     end
     return awards
   end
 
+  def awards_from_html
+    html = Paperclip.io_adapters.for(forecast_web).read
+    return html_to_awards html
+  end
+
+  # Do any awards have no usaid_web_ids?
+  def awards_without_usaid_web_ids
+    awards = awards_from_html
+    return awards.select {|a| a['usaid_web_id'].blank?}
+  end
+
   def changes_from snapshot
     all_changes = []
-    current_awards = awards_from_files
-    past_awards = snapshot.awards_from_files
+    current_awards = awards_from_html
+    past_awards = snapshot.awards_from_html
     past_award_web_ids = past_awards.map{|a| a['usaid_web_id']}
     # Find the changes for each of the current awards
     current_awards.each do |current_award|
@@ -64,7 +77,7 @@ class Snapshot < ApplicationRecord
   def award_changes current, past
     changes = {}
     current.each do |field, value|
-      if value != past[field] && field != Award::HEADERS[:last_modified_at]
+      if value != past[field] && field != 'last_modified_at'
         changes[field] = {
           'new' => value,
           'past' => past[field]
@@ -81,14 +94,14 @@ class Snapshot < ApplicationRecord
   def award_summary award, props
     return {
       'usaid_web_id' => award['usaid_web_id'],
-      'title' => award[Award::HEADERS[:title]],
+      'title' => award['title'],
       'url' => award['url'],
-      'unit' => award[Award::HEADERS[:mbio_name]],
-      'type' => award[Award::HEADERS[:type]],
-      'sector' => award[Award::HEADERS[:sector]],
-      'cost_range' => award[Award::HEADERS[:cost_range]],
-      'release_date' => award[Award::HEADERS[:release_date]],
-      'award_date' => award[Award::HEADERS[:award_date]],
+      'unit' => award['mbio_name'],
+      'type' => award['type'],
+      'sector' => award['sector'],
+      'cost_range' => award['cost_range'],
+      'release_date' => award['release_date'],
+      'award_date' => award['award_date'],
     }.merge(props)
   end
 

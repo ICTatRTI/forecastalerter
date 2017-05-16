@@ -1,24 +1,24 @@
 class Award < ApplicationRecord
 
   HEADERS = {
-    mbio_name: "M/B/IO Name",
-    aa_specialist: "A&A Specialist",
+    mbio_name: "Operating Unit",
+    aa_specialist: "A&A Specialist / POC",
     title: "Award Title",
     description: "Award Description",
     sector: "Sector",
-    code: "Code",
+    code: "NAICS Code",
     cost_range: "Total Estimated Cost/Amount Range",
     incumbent: "Incumbent",
     type: "Award/Action Type",
-    sb_setaside: "Small Business Set Aside",
+    sb_setaside: "Small Business Set-Aside",
     fiscal_year: "Fiscal Year of Action",
     award_date:  "Anticipated Award Date",
     release_date: "Anticipated Solicitation Release Date",
     award_length: "Award Length",
     solicitation_number: "Solicitation Number",
-    bf_status_change: "Business Forecast Status Change",
+    bf_status_change: "Forecast Status Change",
     location: "Location",
-    last_modified_at: "Last Modified Date"
+    last_modified_at: "Last updated"
   }
 
   def self.find_usaid_web_id web_id
