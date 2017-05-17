@@ -55,6 +55,8 @@ module HtmlFileContent extend ActiveSupport::Concern
         end
       end
 
+      award['description'] = doc.at_css('.award-description').text
+
       labels = award_div.css('.award-details .details-column .label').map(&:text)
       labels += award_div.css('.award-details .details-tri-columns .label').map(&:text)
       values = award_div.css('.award-details .details-column .value').map(&:text)
