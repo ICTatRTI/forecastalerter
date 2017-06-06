@@ -8,9 +8,10 @@ class SnapshotChangeWorker
     unless changes.empty?
       User.all.each do |user|
         AwardChangesMailer.awards_changed(user, changes, snapshot.snapshot_time, previous_snapshot.snapshot_time).deliver_now
+        logger.info "Queued snapshot #{snapshot.id} changes to #{user.email}"
       end
     else
-      puts "Changes are empty for [#{snapshot.id}]:#{snapshot.snapshot_time}"
+      logger.info "Changes are empty for snapshot #{snapshot.id}:#{snapshot.snapshot_time}"
     end
   end
 
