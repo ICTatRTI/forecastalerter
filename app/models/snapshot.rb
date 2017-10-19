@@ -3,15 +3,25 @@ class Snapshot < ApplicationRecord
 
   has_attached_file :forecast_workbook
   has_attached_file :forecast_web
+  has_attached_file :grantsgov_web
+
   validates_attachment_content_type :forecast_workbook, 
     content_type: "application/vnd.ms-excel"
   validates_attachment_content_type :forecast_web, 
     content_type: "text/html"
+  validates_attachment_content_type :grantsgov_web, 
+    content_type: "application/json"
 
   def self.take_snapshot
     snapshot = Snapshot.new snapshot_time: DateTime.now
     snapshot.download_workbook!
     snapshot.download_web!
+    return snapshot
+  end
+
+  def self.take_grants_snapshot
+    snapshot = Snapshot.new snapshot_time: DateTime.now
+    snapshot.download_grants!
     return snapshot
   end
 
@@ -117,6 +127,22 @@ class Snapshot < ApplicationRecord
     self.forecast_web = StringIO.new Net::HTTP.get(uri)
     self.forecast_web_file_name = File.basename(uri.path)
     self.forecast_web_content_type = "text/html"
+  end
+
+  def download_grants!
+    uri = URI(USAID_URLS[:grants_results])
+    
+    params = {:agencies => "USAID|USAID-*", :startRecordNum => 0, :oppStatuses => "forecasted|posted", :sortBy => "openDate|desc"}
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    
+    request = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
+    request.body = params.to_json
+    resp = http.request(request)
+
+    self.grantsgov_web = StringIO.new resp.body
+    self.grantsgov_web_file_name = File.basename(uri.path)
+    self.grantsgov_web_content_type = "application/json"
   end
 
 end

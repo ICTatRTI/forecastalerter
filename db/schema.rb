@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425130100) do
+ActiveRecord::Schema.define(version: 20171019015212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,10 @@ ActiveRecord::Schema.define(version: 20170425130100) do
     t.string   "forecast_web_content_type"
     t.integer  "forecast_web_file_size"
     t.datetime "forecast_web_updated_at"
+    t.string   "grantsgov_web_file_name"
+    t.string   "grantsgov_web_content_type"
+    t.integer  "grantsgov_web_file_size"
+    t.datetime "grantsgov_web_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
