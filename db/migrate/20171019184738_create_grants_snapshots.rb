@@ -1,0 +1,10 @@
+class CreateGrantsSnapshots < ActiveRecord::Migration[5.0]
+  def change
+    create_table :grants_snapshots do |t|
+      t.datetime :snapshot_time
+      t.json :awards_changes
+
+      t.timestamps
+    end
+  end
+end

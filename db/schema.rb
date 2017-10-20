@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425130100) do
+ActiveRecord::Schema.define(version: 20171019203259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20170425130100) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["usaid_web_id"], name: "index_awards_on_usaid_web_id", unique: true, using: :btree
+  end
+
+  create_table "grants_snapshots", force: :cascade do |t|
+    t.datetime "snapshot_time"
+    t.json     "awards_changes"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "grantsgov_web_file_name"
+    t.string   "grantsgov_web_content_type"
+    t.integer  "grantsgov_web_file_size"
+    t.datetime "grantsgov_web_updated_at"
   end
 
   create_table "snapshots", force: :cascade do |t|

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div class="awards" style="font-family: Calibri, Arial, Helvetica, sans-serif; color: #222222;">
+      <h2>Summary of Grants.gov Business Forecast Changes - <%= @previous_date.strftime('%m/%d/%Y') %> to <%= @current_date.strftime('%m/%d/%Y') %></h2>
+      <% @changes.each do |change| %>
+        <hr/>
+        <%
+          change_type = ''
+          change_style = ''
+          if change['changes']
+            change_type = 'Updated'
+            change_style = "color:#31708f"
+          elsif change['new']
+            change_type = 'New'
+            change_style = "color:#3c763d"
+          elsif change['removed']
+            change_type = 'Removed'
+            change_style = "color:#a94442"
+          end
+        %>
+        <h3 style="margin-bottom:0;">
+          <span style="<%= change_style %>">[<%= change_type %>]</span> 
+          <%= change['title'] %>
+        </h3>
+        <p>
+          <em><a href="https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['grant_id'] %>">https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['grant_id'] %></a></em><br/>
+        </p>
+        <p>
+          <strong>Grant Number</strong>: <%= change['number'] %><br/>
+          <strong>Agency Code</strong>: <%= change['agencyCode'] %><br/>
+          <strong>Agency</strong>: <%= change['agency'] %><br/>
+          <strong>Open Date</strong>: <%= change['openDate'] %><br/>
+          <strong>Close Date</strong>: <%= change['closeDate'] %><br/>
+          <strong>Opportunity Status</strong>: <%= change['oppStatus'] %><br/>
+          <strong>Document Type</strong>: <%= change['docType'] %><br/>
+        </p>
+        <% if change['changes'] %>
+          <ul style="color:#31708f;"">
+            <% change['changes'].each do |field, values| %>
+              <% if (values['new'] && values['new'].length > 70) || 
+                  (values['past'] && values['past'].length > 70) %>
+                <li>
+                  <strong><%= Award::HEADERS[field.to_sym] %></strong> was updated 
+                  <ul>
+                    <li>
+                      <strong>New</strong> - <%= values['new'] %>
+                    </li>
+                    <li>
+                      <strong>Previous</strong> - <%= values['past'] %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li>
+                  <strong><%= Award::HEADERS[field.to_sym] %></strong> was changed from 
+                  <em><%= values['past'] %></em> to 
+                  <em><%= values['new'] %></em>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% elsif change['new'] %>
+          <p class="changes-box" style="color:#3c763d;">
+            Was added to the Forecast
+          </p>
+        <% elsif change['removed'] %>
+          <p class="changes-box" style="color:#a94442;">
+            Was removed from the Forecast
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    <hr/>
+    <div style="text-align:center;">
+      <em>
+        This email was sent to you from the RTI Grants.gov Forecast Alerter. If you don't want to be on this list, send an email to <a href="mailto:<%= ENV['EMAILER_CONTACT'] %>"><%= ENV['EMAILER_CONTACT'] %></a>
+      </em>
+    </div>
+  </body>
+</html>

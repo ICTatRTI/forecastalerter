@@ -3,6 +3,7 @@ class Snapshot < ApplicationRecord
 
   has_attached_file :forecast_workbook
   has_attached_file :forecast_web
+
   validates_attachment_content_type :forecast_workbook, 
     content_type: "application/vnd.ms-excel"
   validates_attachment_content_type :forecast_web, 
@@ -14,6 +15,7 @@ class Snapshot < ApplicationRecord
     snapshot.download_web!
     return snapshot
   end
+
 
   def previous
     Snapshot.where("snapshot_time < ?", snapshot_time - 12.hours).order("snapshot_time desc").first
@@ -118,5 +120,6 @@ class Snapshot < ApplicationRecord
     self.forecast_web_file_name = File.basename(uri.path)
     self.forecast_web_content_type = "text/html"
   end
+  
 
 end

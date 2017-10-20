@@ -73,4 +73,9 @@ module HtmlFileContent extend ActiveSupport::Concern
     end
   end
 
+  def json_to_grants json
+    data = JSON.parse(json)
+    return data['oppHits']
+  end
+
 end

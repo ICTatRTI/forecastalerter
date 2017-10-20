@@ -4,4 +4,8 @@ namespace :snapshot do
     SnapshotWorker.perform_async
   end
 
+  task :take_and_notify_grants => :environment do |task, args|
+    GrantsSnapshotWorker.perform_async
+  end
+
 end
