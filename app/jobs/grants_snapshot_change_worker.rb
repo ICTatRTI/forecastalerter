@@ -8,8 +8,7 @@ class GrantsSnapshotChangeWorker
     changes = snapshot.changes_from previous_snapshot
     unless changes.empty?
       User.all.each do |user|
-        #puts user.email
-        #GrantsChangesMailer.grants_changed(user, changes, snapshot.snapshot_time, previous_snapshot.snapshot_time).deliver_now
+        AwardChangesMailer.grants_changed(user, changes, snapshot.snapshot_time, previous_snapshot.snapshot_time).deliver_now
         logger.info "Queued snapshot #{snapshot.id} changes to #{user.email}"
       end
     else

@@ -5,7 +5,7 @@
   </head>
   <body>
     <div class="awards" style="font-family: Calibri, Arial, Helvetica, sans-serif; color: #222222;">
-      <h2>Summary of USAID Business Forecast Changes - <%= @previous_date.strftime('%m/%d/%Y') %> to <%= @current_date.strftime('%m/%d/%Y') %></h2>
+      <h2>Summary of Grants.gov Business Forecast Changes - <%= @previous_date.strftime('%m/%d/%Y') %> to <%= @current_date.strftime('%m/%d/%Y') %></h2>
       <% @changes.each do |change| %>
         <hr/>
         <%
@@ -27,13 +27,12 @@
           <%= change['title'] %>
         </h3>
         <p>
-          <em><a href="https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['id'] %>">https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['id'] %></a></em><br/>
+          <em><a href="https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['grant_id'] %>">https://www.grants.gov/web/grants/view-opportunity.html?oppId=<%= change['grant_id'] %></a></em><br/>
         </p>
         <p>
           <strong>Grant Number</strong>: <%= change['number'] %><br/>
           <strong>Agency Code</strong>: <%= change['agencyCode'] %><br/>
           <strong>Agency</strong>: <%= change['agency'] %><br/>
-          <strong>Type</strong>: <%= change['type'] %><br/>
           <strong>Open Date</strong>: <%= change['openDate'] %><br/>
           <strong>Close Date</strong>: <%= change['closeDate'] %><br/>
           <strong>Opportunity Status</strong>: <%= change['oppStatus'] %><br/>
