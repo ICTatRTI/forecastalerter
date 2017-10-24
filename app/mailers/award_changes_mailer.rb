@@ -14,7 +14,7 @@ class AwardChangesMailer < ActionMailer::Base
     @changes = changes
     @current_date = current_date
     @previous_date = previous_date
-    mail(to: 'apreston@rti.org', subject: "Summary of Grants.gov Forecast Changes for USAID - #{current_date.strftime('%m/%d/%Y')}")
+    mail(to: 'grants-business-forecast@rti.org', subject: "Summary of Grants.gov Forecast Changes for USAID - #{current_date.strftime('%m/%d/%Y')}")
   end
 
 end
