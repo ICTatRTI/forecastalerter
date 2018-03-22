@@ -13,4 +13,9 @@ Rails.application.routes.draw do
   end if Rails.env.production?
   mount Sidekiq::Web, at: "/sidekiq"
 
+  scope '/api' do
+    post 'register', to: 'users#register'
+    post 'unregister', to: 'users#unregister'
+  end
+
 end
