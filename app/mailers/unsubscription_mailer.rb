@@ -1,8 +1,10 @@
 class UnsubscriptionMailer < ApplicationMailer
-	default from: 'noreply@rti-ghd.org'
+	default from: 'USAID Business Forecast <noreply@rti-ghd.org>'
  
   def good_bye_email(user)
     @user = user[0]
-    mail(to: @user.email, subject: 'Good bye from the USAID Business Forecast')
+    if @user != nil
+    	mail(to: @user.email, subject: 'Goodbye from the USAID Business Forecast')
+    end
   end
 end

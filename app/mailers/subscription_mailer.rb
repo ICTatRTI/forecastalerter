@@ -1,5 +1,5 @@
 class SubscriptionMailer < ApplicationMailer
-	default from: 'noreply@rti-ghd.org'
+	default from: 'USAID Business Forecast <noreply@rti-ghd.org>'
  
   def welcome_email(user)
     @user = user
