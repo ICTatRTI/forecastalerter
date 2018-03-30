@@ -9,8 +9,7 @@ class AwardChangesMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Summary of USAID Business Forecast Changes - #{current_date.strftime('%m/%d/%Y')}")
   end
 
-  def grants_changed(user, changes, current_date, previous_date)
-    @user = user
+  def grants_changed(changes, current_date, previous_date)
     @changes = changes
     @current_date = current_date
     @previous_date = previous_date
