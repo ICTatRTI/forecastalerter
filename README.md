@@ -4,7 +4,7 @@ This is a simple application to alert changes in online documents:
 
   - [https://www.usaid.gov/business-forecast/search](https://www.usaid.gov/business-forecast/search) - Search age
   - [https://www.usaid.gov/sites/default/files/business_forecast/usaid-business-forecast.xls](https://www.usaid.gov/sites/default/files/business_forecast/usaid-business-forecast.xls) - Excel version of the forecast
-  - [https://www.grants.gov/grantsws/rest/opportunities/search/] - Grants.gov search results
+  - [https://www.grants.gov/grantsws/rest/opportunities/search/](https://www.grants.gov/grantsws/rest/opportunities/search/) - Grants.gov search results
 
 ## Model
 
