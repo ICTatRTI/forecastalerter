@@ -9,6 +9,9 @@ class GrantsSnapshotChangeWorker
     unless changes.empty?
       AwardChangesMailer.grants_changed(changes, snapshot.snapshot_time, previous_snapshot.snapshot_time).deliver_now
       logger.info "Queued snapshot #{snapshot.id} changes to #{user.email}"
+  	else
+      logger.info "Changes are empty for snapshot #{snapshot.id}:#{snapshot.snapshot_time}"
+    end
   end
 
 end
