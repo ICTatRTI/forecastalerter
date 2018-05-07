@@ -1,5 +1,6 @@
 class AwardChangesMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
+  default from: 'USAID Business Forecast <noreply@rti-ghd.org>'
 
   def awards_changed(user, changes, current_date, previous_date)
     @user = user
