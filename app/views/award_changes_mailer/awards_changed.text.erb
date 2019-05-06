@@ -1,0 +1,47 @@
+Summary of USAID Business Forecast Changes - <%= @previous_date.strftime('%m/%d/%Y') %> to <%= @current_date.strftime('%m/%d/%Y') %>
+      <% @changes.each do |change| %>
+
+        <%
+          change_type = ''
+          change_style = ''
+          if change['changes']
+            change_type = 'Updated'
+            change_style = "color:#31708f"
+          elsif change['new']
+            change_type = 'New'
+            change_style = "color:#3c763d"
+          elsif change['removed']
+            change_type = 'Removed'
+            change_style = "color:#a94442"
+          end
+        %>
+       
+        <%= change['title'] %>
+
+        <%= change['url'] %>
+
+        Unit: <%= change['unit'] %>
+          Sector: <%= change['sector'] %>
+          Type: <%= change['type'] %>
+          Cost Range: <%= change['cost_range'] %>
+          Release Date: <%= change['release_date'] %>
+          Award Date: <%= change['award_date'] %>
+        <% if change['changes'] %>
+            <% change['changes'].each do |field, values| %>
+              <% if (values['new'] && values['new'].length > 70) || 
+                  (values['past'] && values['past'].length > 70) %>
+                  <%= Award::HEADERS[field.to_sym] %> was updated 
+                      New - <%= values['new'] %>
+                      Previous - <%= values['past'] %>
+              <% else %>
+                  <%= Award::HEADERS[field.to_sym] %> was changed from 
+                  <%= values['past'] %> to 
+                  <%= values['new'] %>
+              <% end %>
+            <% end %>
+        <% elsif change['new'] %>
+            Was added to the Forecast
+        <% elsif change['removed'] %>
+            Was removed from the Forecast
+        <% end %>
+      <% end %>
