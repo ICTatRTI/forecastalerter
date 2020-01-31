@@ -13,7 +13,7 @@ gem 'pg'
 # Use redis for Sidekiq
 gem 'redis', '~> 3.3'
 # Use Puma as the app  server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 # Sidekiq for jobs
 gem 'sidekiq', '~> 4.2'
 
