@@ -4,8 +4,13 @@ class SnapshotWorker
   def perform
     Snapshot.transaction do
       snapshot = Snapshot.take_snapshot
-      snapshot.save!
-      SnapshotChangeWorker.perform_async snapshot.id 
+      
+      # avoid invalid files 
+      if snapshot.forecast_web_file_size > 500
+        snapshot.save!
+        SnapshotChangeWorker.perform_async snapshot.id 
+      end
+
     end
   end
 
