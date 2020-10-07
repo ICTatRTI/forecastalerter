@@ -64,8 +64,6 @@ module HtmlFileContent extend ActiveSupport::Concern
       labels.each_with_index do |label, i|
         if Award::HEADERS.key(label.gsub(/:\z/,''))
           award[Award::HEADERS.key(label.gsub(/:\z/,'')).to_s] = values[i].squish
-        else
-          logger.info "Unable to find key '#{label}' for HTML awards"
         end
       end
 
