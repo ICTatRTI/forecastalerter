@@ -18,7 +18,10 @@ class Award < ApplicationRecord
     solicitation_number: "Solicitation Number",
     bf_status_change: "Forecast Status Change",
     location: "Location",
-    last_modified_at: "Last updated"
+    last_modified_at: "Last updated",
+    eligibility_criteria: "Eligibility Criteria",
+    category_management_contract_vehicle: "Category Management Contract Vehicle",
+    :cocreation: "Co-creation"
   }
 
   def self.find_usaid_web_id web_id

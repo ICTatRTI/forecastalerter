@@ -36,6 +36,9 @@
           <strong>Cost Range</strong>: <%= change['cost_range'] %><br/>
           <strong>Release Date</strong>: <%= change['release_date'] %><br/>
           <strong>Award Date</strong>: <%= change['award_date'] %><br/>
+          <strong>Co-Creation</strong>: <%= change['cocreation'] %><br/>
+          <strong>Eligibility Criteria</strong>: <%= change['eligibility_criteria'] %><br/>
+          <strong>Category Management Contract Vehicle</strong>: <%= change['category_management_contract_vehicle'] %><br/>
         </p>
         <% if change['changes'] %>
           <ul style="color:#31708f;"">
@@ -76,9 +79,13 @@
     <hr/>
     <div style="text-align:center;">
       <em>
-        This email was sent to you from the <a href="mailto:<%= ENV['EMAILER_CONTACT'] %>">RTI USAID Forecast Alerter</a>
+        This email was sent to you from the RTI USAID Forecast Alerter &#127919; 
       </em>
-      
+    </div>
+    <div style="text-align:center;">
+      <em>
+        Have an idea for making this email more useful? Let <a href="mailto:<%= ENV['EMAILER_CONTACT'] %>">us know.</a>
+      </em>
     </div>
     <div style="text-align:center;">
       <em>
