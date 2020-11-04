@@ -102,6 +102,9 @@ class Snapshot < ApplicationRecord
       'type' => award['type'],
       'sector' => award['sector'],
       'cost_range' => award['cost_range'],
+      'eligibility_criteria' => award['eligibility_criteria'],
+      'category_management_contract_vehicle' => award['category_management_contract_vehicle'],
+      'cocreation' => award['cocreation'],
       'release_date' => award['release_date'],
       'award_date' => award['award_date'],
     }.merge(props)
