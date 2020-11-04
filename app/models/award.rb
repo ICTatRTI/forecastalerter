@@ -21,7 +21,7 @@ class Award < ApplicationRecord
     last_modified_at: "Last updated",
     eligibility_criteria: "Eligibility Criteria",
     category_management_contract_vehicle: "Category Management Contract Vehicle",
-    :cocreation: "Co-creation"
+    cocreation: "Co-creation"
   }
 
   def self.find_usaid_web_id web_id
